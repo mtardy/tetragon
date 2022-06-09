@@ -10,7 +10,7 @@ jobs:
     timeout-minutes: 40
     strategy:
       matrix:
-        os: [ ubuntu-20.04 ]
+        os: [ ubuntu-22.04 ]
     steps:
     - name: Install Go
       uses: actions/setup-go@v3
@@ -24,10 +24,12 @@ jobs:
 
     - name: Install dependencies
       run: |
-        sudo apt install libelf-dev netcat-traditional libcap-dev gcc
+        sudo apt-get install libelf-dev netcat-traditional libcap-dev gcc clang-13 llvm-13
+        sudo ln -vsnf /usr/lib/llvm-13/bin/clang /usr/bin/clang
+        sudo ln -vsnf /usr/lib/llvm-13/bin/llc /usr/bin/llc
 
         cd go/src/github.com/cilium/tetragon/
-        sudo -E make tools-install LIBBPF_INSTALL_DIR=/usr/local/lib CLANG_INSTALL_DIR=/usr/bin
+        sudo -E make tools-install LIBBPF_INSTALL_DIR=/usr/local/lib
         sudo -E ldconfig /usr/local/
 
         sudo sed -i '/secure_path/d' /etc/sudoers
