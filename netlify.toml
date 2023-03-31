@@ -10,7 +10,7 @@
   command = "npm ci && hugo"
   # The ignore command is used by Netlify deploy bot to filter if the PR should
   # be previewed or not, and generally if the website should be built or not.
-  ignore = "! git diff main --name-only | grep ^docs/"
+  ignore = "bash ../ignory.sh"
 
 [build.environment]
   HUGO_VERSION = "0.111.3"
