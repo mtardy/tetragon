@@ -65,7 +65,7 @@
         "gomodUpdateImportPaths",
       ],
       postUpgradeTasks: {
-        "commands": ["make", "codegen"],
+        "commands": ["make codegen"],
         "fileFilters": ["vendor/**", "api/**"],
         // postUpgradeTask is executed for the whole branch and not for every dependency
         "executionMode": "branch"
@@ -80,9 +80,6 @@
       ],
       matchBaseBranches: [
         "main"
-      ],
-      "schedule": [
-        "on friday"
       ],
     },
     {
@@ -97,7 +94,7 @@
         "gomodUpdateImportPaths",
       ],
       postUpgradeTasks: {
-        "commands": ["make", "codegen"],
+        "commands": ["make codegen"],
         "fileFilters": ["vendor/**", "api/**"],
         // postUpgradeTask is executed for the whole branch and not for every dependency
         "executionMode": "branch"
@@ -112,9 +109,6 @@
       ],
       matchBaseBranches: [
         "main"
-      ],
-      "schedule": [
-        "on friday"
       ],
     },
     {
@@ -130,7 +124,7 @@
       ],
       postUpgradeTasks: {
         // TODO make generate
-        "commands": ["make", "codegen"],
+        "commands": ["make codegen"],
         "fileFilters": ["vendor/**", "api/**"],
         // postUpgradeTask is executed for the whole branch and not for every dependency
         "executionMode": "branch"
@@ -145,9 +139,6 @@
       ],
       matchBaseBranches: [
         "main"
-      ],
-      "schedule": [
-        "on friday"
       ],
     },
     {
@@ -172,9 +163,6 @@
         "go",
         "docker.io/library/golang"
       ],
-      "schedule": [
-        "on friday"
-      ]
     },
     {
       // Group golangci-lint updates to overrule grouping of version updates in the GHA files.
