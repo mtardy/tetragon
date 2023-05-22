@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+        uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
         with:
           fetch-depth: 0         # Fetch all history for .GitInfo and .Lastmod
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@16361eb4acea8698b220b76c0d4e84e1fd22c61d
+        uses: peaceiris/actions-hugo@3d92e2fd556bef7470d7e2a6aea63141183c20a6
         with:
           hugo-version: '0.111.2'
           extended: true
@@ -37,7 +37,7 @@ jobs:
 
       - name: Links Checker
         id: lychee
-        uses: lycheeverse/lychee-action@9ace499fe66cee282a29eaa628fdac2c72fa087f
+        uses: lycheeverse/lychee-action@21b2b78c236322f7dcf5b8dbddaa6442f39c2f32
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:

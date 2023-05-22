@@ -20,18 +20,18 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+        uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
         with:
           fetch-depth: 0         # Fetch all history for .GitInfo and .Lastmod
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@16361eb4acea8698b220b76c0d4e84e1fd22c61d
+        uses: peaceiris/actions-hugo@3d92e2fd556bef7470d7e2a6aea63141183c20a6
         with:
           hugo-version: '0.111.2'
           extended: true
 
       - name: Setup Node
-        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c
+        uses: actions/setup-node@a9893b0cfb0821c9c7b5fec28a6a2e6cdd5e20a4
         with:
           node-version: '18'
           cache: 'npm'
@@ -74,5 +74,5 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@0243b6c10d06cb8e95ed8ee471231877621202c0
+        uses: actions/deploy-pages@b580d214b4e13b2a70d0e04376a86ed862ebb558
 

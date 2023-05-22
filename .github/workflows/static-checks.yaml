@@ -14,15 +14,15 @@ jobs:
   static-checks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+      - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
         with:
           fetch-depth: 0
       - name: Install Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@fac708d6674e30b6ba41289acaab6d4b75aa0753 # v4
         with:
           go-version: '1.18.3'
       - name: Run static checks
-        uses: golangci/golangci-lint-action@08e2f20817b15149a52b5b3ebe7de50aff2ba8c5
+        uses: golangci/golangci-lint-action@7233bd71cb7be55595200383f0b95fe1639ce9ed
         with:
           version: v1.52.2
           args: --config=.golangci.yml --verbose
