@@ -1,4 +1,9 @@
 {
+  // self-hosted configuration
+  "username": "self-hosted-renovate-test[bot]",
+  "repositories": ["mtardy/tetragon"],
+  "allowedPostUpgradeCommands": ["^make codegen$", "^make generate$"],
+  // repository configuration
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base",
@@ -65,8 +70,8 @@
         "gomodUpdateImportPaths",
       ],
       postUpgradeTasks: {
-        "commands": ["make codegen"],
-        "fileFilters": ["vendor/**", "api/**"],
+        "commands": ["make codegen", "make generate"],
+        "fileFilters": ["vendor/**", "api/**", "pkg/k8s/**"],
         // postUpgradeTask is executed for the whole branch and not for every dependency
         "executionMode": "branch"
       },
