@@ -33,13 +33,23 @@ import (
 
 type kindContextKey string
 
+// GetKindClusterFromContext helps extract the kind.Cluster object from the context.
+// This can be used to setup and run tests of multi cluster kind.
+func GetKindClusterFromContext(ctx context.Context, clusterName string) (*kind.Cluster, bool) {
+	kindCluster := ctx.Value(kindContextKey(clusterName))
+	if kindCluster == nil {
+		return nil, false
+	}
+	cluster, ok := kindCluster.(*kind.Cluster)
+	return cluster, ok
+}
+
 // CreateKindCluster returns an env.Func that is used to
 // create a kind cluster that is then injected in the context
 // using the name as a key.
 //
 // NOTE: the returned function will update its env config with the
 // kubeconfig file for the config client.
-//
 func CreateKindCluster(clusterName string) env.Func {
 	return func(ctx context.Context, cfg *envconf.Config) (context.Context, error) {
 		k := kind.NewCluster(clusterName)
@@ -67,7 +77,6 @@ func CreateKindCluster(clusterName string) env.Func {
 //
 // NOTE: the returned function will update its env config with the
 // kubeconfig file for the config client.
-//
 func CreateKindClusterWithConfig(clusterName, image, configFilePath string) env.Func {
 	return func(ctx context.Context, cfg *envconf.Config) (context.Context, error) {
 		k := kind.NewCluster(clusterName)
@@ -131,7 +140,6 @@ func waitForControlPlane(client klient.Client) error {
 // retrieves a previously saved kind Cluster in the context (using the name), then deletes it.
 //
 // NOTE: this should be used in a Environment.Finish step.
-//
 func DestroyKindCluster(name string) env.Func {
 	return func(ctx context.Context, cfg *envconf.Config) (context.Context, error) {
 		clusterVal := ctx.Value(kindContextKey(name))
@@ -155,7 +163,6 @@ func DestroyKindCluster(name string) env.Func {
 // LoadDockerImageToCluster returns an EnvFunc that
 // retrieves a previously saved kind Cluster in the context (using the name), and then loads a docker image
 // from the host into the cluster.
-//
 func LoadDockerImageToCluster(name, image string) env.Func {
 	return func(ctx context.Context, cfg *envconf.Config) (context.Context, error) {
 		clusterVal := ctx.Value(kindContextKey(name))
@@ -179,7 +186,6 @@ func LoadDockerImageToCluster(name, image string) env.Func {
 // LoadImageArchiveToCluster returns an EnvFunc that
 // retrieves a previously saved kind Cluster in the context (using the name), and then loads a docker image TAR archive
 // from the host into the cluster.
-//
 func LoadImageArchiveToCluster(name, imageArchive string) env.Func {
 	return func(ctx context.Context, cfg *envconf.Config) (context.Context, error) {
 		clusterVal := ctx.Value(kindContextKey(name))
@@ -193,6 +199,29 @@ func LoadImageArchiveToCluster(name, imageArchive string) env.Func {
 		}
 
 		if err := cluster.LoadImageArchive(imageArchive); err != nil {
+			return ctx, fmt.Errorf("load image archive: %w", err)
+		}
+
+		return ctx, nil
+	}
+}
+
+// ExportKindClusterLogs returns an EnvFunc that
+// retrieves a previously saved kind Cluster in the context (using the name), and then export cluster logs
+// in the provided destination.
+func ExportKindClusterLogs(name, dest string) env.Func {
+	return func(ctx context.Context, cfg *envconf.Config) (context.Context, error) {
+		clusterVal := ctx.Value(kindContextKey(name))
+		if clusterVal == nil {
+			return ctx, fmt.Errorf("export kind cluster logs: context cluster is nil")
+		}
+
+		cluster, ok := clusterVal.(*kind.Cluster)
+		if !ok {
+			return ctx, fmt.Errorf("export kind cluster logs: unexpected type for cluster value")
+		}
+
+		if err := cluster.ExportLogs(dest); err != nil {
 			return ctx, fmt.Errorf("load image archive: %w", err)
 		}
 

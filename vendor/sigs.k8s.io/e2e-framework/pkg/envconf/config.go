@@ -31,18 +31,20 @@ import (
 
 // Config represents and environment configuration
 type Config struct {
-	client              klient.Client
-	kubeconfig          string
-	namespace           string
-	assessmentRegex     *regexp.Regexp
-	featureRegex        *regexp.Regexp
-	labels              map[string]string
-	skipFeatureRegex    *regexp.Regexp
-	skipLabels          map[string]string
-	skipAssessmentRegex *regexp.Regexp
-	parallelTests       bool
-	dryRun              bool
-	failFast            bool
+	client                  klient.Client
+	kubeconfig              string
+	namespace               string
+	assessmentRegex         *regexp.Regexp
+	featureRegex            *regexp.Regexp
+	labels                  flags.LabelsMap
+	skipFeatureRegex        *regexp.Regexp
+	skipLabels              flags.LabelsMap
+	skipAssessmentRegex     *regexp.Regexp
+	parallelTests           bool
+	dryRun                  bool
+	failFast                bool
+	disableGracefulTeardown bool
+	kubeContext             string
 }
 
 // New creates and initializes an empty environment configuration
@@ -83,6 +85,8 @@ func NewFromFlags() (*Config, error) {
 	e.parallelTests = envFlags.Parallel()
 	e.dryRun = envFlags.DryRun()
 	e.failFast = envFlags.FailFast()
+	e.disableGracefulTeardown = envFlags.DisableGracefulTeardown()
+	e.kubeContext = envFlags.KubeContext()
 
 	return e, nil
 }
@@ -201,24 +205,24 @@ func (c *Config) SkipFeatureRegex() *regexp.Regexp {
 }
 
 // WithLabels sets the environment label filters
-func (c *Config) WithLabels(lbls map[string]string) *Config {
+func (c *Config) WithLabels(lbls map[string][]string) *Config {
 	c.labels = lbls
 	return c
 }
 
 // Labels returns the environment's label filters
-func (c *Config) Labels() map[string]string {
+func (c *Config) Labels() map[string][]string {
 	return c.labels
 }
 
 // WithSkipLabels sets the environment label filters
-func (c *Config) WithSkipLabels(lbls map[string]string) *Config {
+func (c *Config) WithSkipLabels(lbls map[string][]string) *Config {
 	c.skipLabels = lbls
 	return c
 }
 
 // SkipLabels returns the environment's label filters
-func (c *Config) SkipLabels() map[string]string {
+func (c *Config) SkipLabels() map[string][]string {
 	return c.skipLabels
 }
 
@@ -257,6 +261,30 @@ func (c *Config) WithFailFast() *Config {
 // if a test encounters a failure result
 func (c *Config) FailFast() bool {
 	return c.failFast
+}
+
+// WithDisableGracefulTeardown can be used to programmatically disabled the panic
+// recovery enablement on test startup. This will prevent test Finish steps
+// from being executed on panic
+func (c *Config) WithDisableGracefulTeardown() *Config {
+	c.disableGracefulTeardown = true
+	return c
+}
+
+// DisableGracefulTeardown is used to check the panic recovery handler should be enabled
+func (c *Config) DisableGracefulTeardown() bool {
+	return c.disableGracefulTeardown
+}
+
+// WithKubeContext is used to set the kubeconfig context
+func (c *Config) WithKubeContext(kubeContext string) *Config {
+	c.kubeContext = kubeContext
+	return c
+}
+
+// WithKubeContext is used to get the kubeconfig context
+func (c *Config) KubeContext() string {
+	return c.kubeContext
 }
 
 func randNS() string {
