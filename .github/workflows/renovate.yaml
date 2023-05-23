@@ -9,6 +9,10 @@ jobs:
   renovate:
     runs-on: ubuntu-latest
     steps:
+      # make codegen use buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
       - name: Get token
         id: get_token
         uses: tibdex/github-app-token@v1
