@@ -26,9 +26,10 @@ jobs:
         uses: actions/checkout@v3.3.0
 
       - name: Self-hosted Renovate
-        uses: mtardy/renovate-github-action@3008d5b710de7fd6c5266b8e24883f9f49be59a6
+        uses: mtardy/renovate-github-action@dd9911f31fa5df43d48afc918b4788cabbe7d86d
         env:
           LOG_LEVEL: 'debug'
         with:
           configurationFile: .github/renovate.json5
           token: '${{ steps.get_token.outputs.token }}'
+          mount-docker-socket: true
