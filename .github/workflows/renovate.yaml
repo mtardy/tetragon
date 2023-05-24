@@ -12,6 +12,8 @@ jobs:
       # make codegen use buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
+        with:
+          install: true
 
       - name: Get token
         id: get_token
