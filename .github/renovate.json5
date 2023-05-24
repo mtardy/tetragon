@@ -71,7 +71,7 @@
       ],
       postUpgradeTasks: {
         "commands": ["mkdir -p $HOME/.docker/cli-plugins && curl -L https://github.com/docker/buildx/releases/download/v0.10.5/buildx-v0.10.5.linux-amd64 -o $HOME/.docker/cli-plugins/docker-buildx && chmod +x $HOME/.docker/cli-plugins/docker-buildx", "make codegen", "make generate"],
-        "fileFilters": ["vendor/**", "api/**", "pkg/k8s/**"],
+        "fileFilters": ["**/**"],
         // postUpgradeTask is executed for the whole branch and not for every dependency
         "executionMode": "branch"
       },
@@ -100,7 +100,7 @@
       ],
       postUpgradeTasks: {
         "commands": ["mkdir -p $HOME/.docker/cli-plugins && curl -L https://github.com/docker/buildx/releases/download/v0.10.5/buildx-v0.10.5.linux-amd64 -o $HOME/.docker/cli-plugins/docker-buildx && chmod +x $HOME/.docker/cli-plugins/docker-buildx", "make codegen", "make generate"],
-        "fileFilters": ["vendor/**", "api/**"],
+        "fileFilters": ["**/**"],
         // postUpgradeTask is executed for the whole branch and not for every dependency
         "executionMode": "branch"
       },
@@ -130,7 +130,7 @@
       postUpgradeTasks: {
         // TODO make generate
         "commands": ["mkdir -p $HOME/.docker/cli-plugins && curl -L https://github.com/docker/buildx/releases/download/v0.10.5/buildx-v0.10.5.linux-amd64 -o $HOME/.docker/cli-plugins/docker-buildx && chmod +x $HOME/.docker/cli-plugins/docker-buildx", "make codegen", "make generate"],
-        "fileFilters": ["vendor/**", "api/**"],
+        "fileFilters": ["**/**"],
         // postUpgradeTask is executed for the whole branch and not for every dependency
         "executionMode": "branch"
       },
