@@ -1,6 +1,6 @@
 {
   // self-hosted configuration
-  "username": "self-hosted-renovate-test[bot]",
+  "username": "tetragon-renovate[bot]",
   "repositories": ["mtardy/tetragon"],
   "allowedPostUpgradeCommands": [".*"],
   // repository configuration
