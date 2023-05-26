@@ -4,9 +4,9 @@ go 1.18
 
 require (
 	github.com/cilium/tetragon v0.0.0-00010101000000-000000000000
-	github.com/sirupsen/logrus v1.9.0
-	github.com/stretchr/testify v1.8.2
-	google.golang.org/grpc v1.54.0
+	github.com/sirupsen/logrus v1.9.2
+	github.com/stretchr/testify v1.8.3
+	google.golang.org/grpc v1.54.1
 	google.golang.org/protobuf v1.30.0
 	sigs.k8s.io/yaml v1.3.0
 )
