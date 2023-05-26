@@ -44,8 +44,8 @@ jobs:
       # commands shorter and understandable
       - name: Create and set permissions for install buildx bash script
         run: |
-          echo '#!/bin/bash' > /tmp/file
-          echo 'd="$HOME/.docker/cli-plugins"' >> /tmp/file
+          echo '#!/bin/bash' > /tmp/install-buildx
+          echo 'd="$HOME/.docker/cli-plugins"' >> /tmp/install-buildx
           echo 'mkdir -p "$d" && mv /tmp/docker-buildx "$d"' >> /tmp/install-buildx
           chmod +x /tmp/install-buildx
 
