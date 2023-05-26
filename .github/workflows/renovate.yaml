@@ -46,7 +46,7 @@ jobs:
         run: |
           echo '#!/bin/bash' > /tmp/install-buildx
           echo 'd="$HOME/.docker/cli-plugins"' >> /tmp/install-buildx
-          echo 'mkdir -p "$d" && mv /tmp/docker-buildx "$d"' >> /tmp/install-buildx
+          echo 'mkdir -p "$d" && ln -s /tmp/docker-buildx "$d"' >> /tmp/install-buildx
           chmod +x /tmp/install-buildx
 
       # renovate clones the repository again in its container fs but it needs
