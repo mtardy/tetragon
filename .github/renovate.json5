@@ -2,7 +2,7 @@
   // self-hosted configuration
   "username": "tetragon-renovate-test[bot]",
   "repositories": ["mtardy/tetragon"],
-  "allowedPostUpgradeCommands": [".*"],
+  "allowedPostUpgradeCommands": ["^/tmp/install-buildx$", "^make codegen$", "^make generate$"],
   // repository configuration
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
@@ -70,9 +70,8 @@
         "gomodUpdateImportPaths",
       ],
       postUpgradeTasks: {
-        "commands": ["mkdir -p $HOME/.docker/cli-plugins && curl -L https://github.com/docker/buildx/releases/download/v0.10.5/buildx-v0.10.5.linux-amd64 -o $HOME/.docker/cli-plugins/docker-buildx && chmod +x $HOME/.docker/cli-plugins/docker-buildx", "make codegen", "make generate"],
+        "commands": ["/tmp/install-buildx", "make codegen", "make generate"],
         "fileFilters": ["**/**"],
-        // postUpgradeTask is executed for the whole branch and not for every dependency
         "executionMode": "branch"
       },
       "matchUpdateTypes": [
@@ -99,9 +98,8 @@
         "gomodUpdateImportPaths",
       ],
       postUpgradeTasks: {
-        "commands": ["mkdir -p $HOME/.docker/cli-plugins && curl -L https://github.com/docker/buildx/releases/download/v0.10.5/buildx-v0.10.5.linux-amd64 -o $HOME/.docker/cli-plugins/docker-buildx && chmod +x $HOME/.docker/cli-plugins/docker-buildx", "make codegen", "make generate"],
+        "commands": ["/tmp/install-buildx", "make codegen", "make generate"],
         "fileFilters": ["**/**"],
-        // postUpgradeTask is executed for the whole branch and not for every dependency
         "executionMode": "branch"
       },
       "matchUpdateTypes": [
@@ -128,10 +126,8 @@
         "gomodUpdateImportPaths",
       ],
       postUpgradeTasks: {
-        // TODO make generate
-        "commands": ["mkdir -p $HOME/.docker/cli-plugins && curl -L https://github.com/docker/buildx/releases/download/v0.10.5/buildx-v0.10.5.linux-amd64 -o $HOME/.docker/cli-plugins/docker-buildx && chmod +x $HOME/.docker/cli-plugins/docker-buildx", "make codegen", "make generate"],
+        "commands": ["/tmp/install-buildx", "make codegen", "make generate"],
         "fileFilters": ["**/**"],
-        // postUpgradeTask is executed for the whole branch and not for every dependency
         "executionMode": "branch"
       },
       "matchUpdateTypes": [
