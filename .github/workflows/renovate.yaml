@@ -37,7 +37,7 @@ jobs:
       - name: Download and set permissions for buildx
         if: steps.cache-buildx.outputs.cache-hit != 'true'
         run: |
-          curl -L -o /tmp/docker-buildx https://github.com/docker/buildx/releases/download/${{ env.BUILDX_VERSION }}/buildx-${{ env.BUILDX_VERSION }}.linux-amd64
+          curl -L -o /tmp/docker-buildx https://github.com/docker/buildx/releases/download/${{ env.buildx_version }}/buildx-${{ env.buildx_version }}.linux-amd64
           chmod +x /tmp/docker-buildx
 
       # this is not strictly necessary but makes the renovate postUpgradeTasks's
@@ -45,8 +45,8 @@ jobs:
       - name: Create and set permissions for install buildx bash script
         run: |
           echo '#!/bin/bash' > /tmp/install-buildx
-          echo 'd="$HOME/.docker/cli-plugins"' >> /tmp/install-buildx
-          echo 'mkdir -p "$d" && ln -s /tmp/docker-buildx "$d"' >> /tmp/install-buildx
+          echo 'DIR="$HOME/.docker/cli-plugins"' >> /tmp/install-buildx
+          echo 'mkdir -p "$DIR" && ln -sf /tmp/docker-buildx "$DIR/docker-buildx"' >> /tmp/install-buildx
           chmod +x /tmp/install-buildx
 
       # renovate clones the repository again in its container fs but it needs
