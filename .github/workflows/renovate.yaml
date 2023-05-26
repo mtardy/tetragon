@@ -5,6 +5,11 @@ on:
     # string has to be quoted.
     - cron: '0/15 * * * *'
   workflow_dispatch:
+    inputs:
+      renovate_log_level_debug:
+        type: boolean
+        default: false
+
 jobs:
   renovate:
     runs-on: ubuntu-latest
@@ -52,7 +57,7 @@ jobs:
       - name: Self-hosted Renovate
         uses: mtardy/renovate-github-action@dd9911f31fa5df43d48afc918b4788cabbe7d86d
         env:
-          LOG_LEVEL: 'debug'
+          LOG_LEVEL: ${{ github.event.inputs.renovate_log_level_debug == 'true' && 'DEBUG' || 'INFO' }}
         with:
           configurationFile: .github/renovate.json5
           token: '${{ steps.get_token.outputs.token }}'
