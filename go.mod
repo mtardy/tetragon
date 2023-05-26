@@ -24,7 +24,7 @@ require (
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51
 	github.com/mennanov/fmutils v0.2.0
 	github.com/opencontainers/runtime-spec v1.1.0-rc.1
-	github.com/pelletier/go-toml v1.9.5
+	github.com/pelletier/go-toml/v2 v2.0.8
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.14.0
 	github.com/prometheus/client_model v0.4.0
@@ -45,7 +45,7 @@ require (
 	k8s.io/api v0.26.2
 	k8s.io/apiextensions-apiserver v0.26.0
 	k8s.io/apimachinery v0.26.2
-	k8s.io/client-go v0.26.2
+	k8s.io/client-go v2.0.0+incompatible
 	k8s.io/code-generator v0.26.0
 	k8s.io/klog/v2 v2.90.1
 	sigs.k8s.io/controller-tools v0.7.0
