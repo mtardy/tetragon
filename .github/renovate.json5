@@ -47,6 +47,9 @@
     "kind/enhancement",
     "priority/release-blocker"
   ],
+  schedule: [
+    "on monday and friday"
+  ],
   // about packageRules: To enable grouping, you configure the groupName field
   // to something non-null.
   "packageRules": [
