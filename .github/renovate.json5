@@ -1,7 +1,7 @@
 {
   // self-hosted configuration
-  "username": "cilium-renovate[bot]",
-  "repositories": ["cilium/tetragon"],
+  "username": "mtardy",
+  "repositories": ["mtardy/tetragon"],
   "allowedPostUpgradeCommands": [
     "^/tmp/install-buildx$", 
     "^make codegen$", 
@@ -15,7 +15,6 @@
     ":gitSignOff",
     "helpers:pinGitHubActionDigests"
   ],
-  "gitAuthor": "cilium-renovate[bot] <134692979+cilium-renovate[bot]@users.noreply.github.com>",
   "includePaths": [
     ".github/workflows/**",
     "go.mod",
