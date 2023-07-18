@@ -2,6 +2,9 @@
   // self-hosted configuration
   "username": "mtardy",
   "repositories": ["mtardy/tetragon"],
+  // this is weird
+  "requireConfig": false,
+  "onboarding": false,
   "allowedPostUpgradeCommands": [
     "^/tmp/install-buildx$", 
     "^make codegen$", 
