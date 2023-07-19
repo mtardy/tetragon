@@ -75,6 +75,9 @@
       "matchFileNames": [
         ".github/workflows/**"
       ],
+      "matchManagers": [
+        "github-actions"
+      ],
       "separateMinorPatch": false,
     },
     {
@@ -203,14 +206,6 @@
       "matchBaseBranches": [
         "main"
       ],
-    },
-    {
-      // Images that directly use docker.io/library/golang for building.
-      "groupName": "golang-images",
-      "matchFileNames": [
-        "Dockerfile",
-        "Makefile"
-      ]
     },
     {
       "matchPackageNames": [
