@@ -216,6 +216,12 @@
         "Dockerfile"
       ],
     },
+    // Upgrade the Go module directive, see:
+    // https://docs.renovatebot.com/modules/versioning/#go-modules-directive-versioning
+    {
+      "matchDatasources": ["golang-version"],
+      "rangeStrategy": "bump"
+    },
     {
       "groupName": "Go",
       "matchDepNames": [
