@@ -27,6 +27,7 @@
     "pkg/k8s/go.sum",
     "Dockerfile*",
     "install/kubernetes/values.yaml",
+    "Makefile.cli"
   ],
   "postUpdateOptions": [
     "gomodTidy"
