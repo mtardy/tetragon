@@ -24,17 +24,17 @@
     "helpers:pinGitHubActionDigests"
   ],
   "includePaths": [
-    ".github/renovate.json5",
-    ".github/workflows/**",
-    "go.mod",
-    "go.sum",
-    "api/go.mod",
-    "api/go.sum",
-    "pkg/k8s/go.mod",
-    "pkg/k8s/go.sum",
+    "\\.github/renovate\\.json5",
+    "\\.github/workflows/**",
+    "go\\.mod",
+    "go\\.sum",
+    "api/go\\.mod",
+    "api/go\\.sum",
+    "pkg/k8s/go\\.mod",
+    "pkg/k8s/go\\.sum",
     "Dockerfile*",
-    "install/kubernetes/values.yaml",
-    "Makefile.cli",
+    "install/kubernetes/values\\.yaml",
+    "Makefile\\.cli",
     "Makefile",
   ],
   "postUpdateOptions": [
@@ -66,7 +66,7 @@
       "groupName": "all github action dependencies",
       "groupSlug": "all-github-action",
       "matchFileNames": [
-        ".github/workflows/**"
+        "\\.github/workflows/**"
       ],
       "matchManagers": [
         "github-actions"
@@ -85,7 +85,7 @@
     },
     {
       "matchFileNames": [
-        ".github/workflows/**"
+        "\\.github/workflows/**"
       ],
       "matchManagers": [
         "github-actions"
@@ -95,8 +95,8 @@
     {
       // not grouping Go minor and major updates together
       "matchFileNames": [
-        "go.mod",
-        "go.sum"
+        "go\\.mod",
+        "go\\.sum"
       ],
       "postUpdateOptions": [
         // update source import paths on major updates
@@ -119,8 +119,8 @@
       "groupName": "all go dependencies main",
       "groupSlug": "all-go-deps-main",
       "matchFileNames": [
-        "go.mod",
-        "go.sum"
+        "go\\.mod",
+        "go\\.sum"
       ],
       "postUpdateOptions": [
         // update source import paths on major updates
@@ -146,8 +146,8 @@
       "groupName": "all API go dependencies main",
       "groupSlug": "all-api-go-deps-main",
       "matchFileNames": [
-        "api/go.mod",
-        "api/go.sum"
+        "api/go\\.mod",
+        "api/go\\.sum"
       ],
       "postUpdateOptions": [
         // update source import paths on major updates
@@ -173,8 +173,8 @@
     {
       // not grouping major updates together
       "matchFileNames": [
-        "pkg/k8s/go.mod",
-        "pkg/k8s/go.sum"
+        "pkg/k8s/go\\.mod",
+        "pkg/k8s/go\\.sum"
       ],
       "postUpdateOptions": [
         // update source import paths on major updates
@@ -196,8 +196,8 @@
       "groupName": "all k8s pkg go dependencies main",
       "groupSlug": "all-k8s-pkg-go-deps-main",
       "matchFileNames": [
-        "pkg/k8s/go.mod",
-        "pkg/k8s/go.sum"
+        "pkg/k8s/go\\.mod",
+        "pkg/k8s/go\\.sum"
       ],
       "postUpdateOptions": [
         // update source import paths on major updates
@@ -221,7 +221,7 @@
     },
     {
       "matchPackageNames": [
-        "docker.io/library/busybox"
+        "docker\\.io/library/busybox"
       ],
       "matchFileNames": [
         "Dockerfile"
@@ -238,7 +238,7 @@
       "groupName": "Go",
       "matchDepNames": [
         "go",
-        "docker.io/library/golang"
+        "docker\\.io/library/golang"
       ],
       // postUpgradeTasks is only for when the Go module directives are bumped
       "postUpgradeTasks": {
@@ -262,7 +262,7 @@
     },
     {
       "matchFileNames": [
-        "install/kubernetes/values.yaml",
+        "install/kubernetes/values\\.yaml",
       ],
       // lint and generate files for helm chart
       "postUpgradeTasks": {
@@ -290,8 +290,8 @@
       "matchPackageNames": ["docker.io/library/ubuntu"],
       "matchManagers": ["dockerfile"],
       "matchFileNames": [
-        "Dockerfile.clang",
-        "Dockerfile.clang-format"
+        "Dockerfile\\.clang",
+        "Dockerfile\\.clang-format"
       ],
       "enabled": false
     }
