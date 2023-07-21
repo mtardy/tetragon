@@ -24,6 +24,7 @@
     "helpers:pinGitHubActionDigests"
   ],
   "includePaths": [
+    ".github/renovate.json5",
     ".github/workflows/**",
     "go.mod",
     "go.sum",
@@ -33,7 +34,8 @@
     "pkg/k8s/go.sum",
     "Dockerfile*",
     "install/kubernetes/values.yaml",
-    "Makefile.cli"
+    "Makefile.cli",
+    "Makefile",
   ],
   "postUpdateOptions": [
     "gomodTidy"
@@ -65,6 +67,9 @@
       "groupSlug": "all-github-action",
       "matchFileNames": [
         ".github/workflows/**"
+      ],
+      "matchManagers": [
+        "github-actions"
       ],
       "matchUpdateTypes": [
         "major",
@@ -240,17 +245,16 @@
         // We need to trigger a golang install manually here because in some
         // cases it might not be preinstalled, see:
         // https://github.com/renovatebot/renovate/discussions/23485
-        // Unfortunately we can't update this automatically with a regex
-        // matcher because renovate reads this json5 and transform it into json
-        // without any of the comments.
-        "commands": ["install-tool golang 1.20.6", "go mod vendor"],
+        // renovate: datasource=golang-version depName=go
+        "commands": ["install-tool golang 1.20.0", "go mod vendor"],
         "fileFilters": ["**/**"],
         "executionMode": "branch"
       },
     },
     {
-      // Group golangci-lint updates to overrule grouping of version updates in the GHA files.
-      // Without this, golangci-lint updates are not in sync for GHA files and other usages.
+      // Group golangci-lint updates to overrule grouping of version updates in
+      // the GHA files. Without this, golangci-lint updates are not in sync for
+      // GHA files and other usages. This needs to be after the GHA grouping.
       "groupName": "golangci-lint",
       "matchDepNames": [
         "golangci/golangci-lint"
@@ -309,6 +313,22 @@
       ],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>.*?)\\s+GO_IMAGE[[:blank:]]*=[[:blank:]]*(?<depName>.*?):(?<currentValue>[^\\s]*)"
+      ]
+    },
+    {
+      "fileMatch": [
+        "^Makefile$"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\s+GOLANGCILINT_WANT_VERSION[[:blank:]]*=[[:blank:]]*(?<currentValue>[^\\s]*)"
+      ]
+    },
+    {
+      "fileMatch": [
+        "^\\.github/renovate\\.json5$"
+      ],
+      "matchStrings": [
+        "// renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\s+.+install-tool golang (?<currentValue>[^'\"]*)"
       ]
     }
   ]
