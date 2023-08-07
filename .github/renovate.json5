@@ -239,7 +239,7 @@
       "groupName": "Go",
       "matchDepNames": [
         "go",
-        "docker\\.io/library/golang"
+        "docker.io/library/golang"
       ],
       // postUpgradeTasks is only for when the Go module directives are bumped
       "postUpgradeTasks": {
