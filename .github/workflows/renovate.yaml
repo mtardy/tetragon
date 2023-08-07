@@ -21,16 +21,6 @@ jobs:
     env:
       buildx_version: 'v0.10.5'
     steps:
-      # we need special permission to be able to operate renovate (view, list,
-      # create issues, PR, etc.) and we use a GitHub application with fine
-      # grained permissions installed in the repository for that.
-      - name: Get token
-        id: get_token
-        uses: cilium/actions-app-token@61a6271ce92ba02f49bf81c755685d59fb25a59a # v0.21.1
-        with:
-          APP_PEM: ${{ secrets.CILIUM_RENOVATE_PEM }}
-          APP_ID: ${{ secrets.CILIUM_RENOVATE_APP_ID }}
-
       # buildx is not installed in the renovate container image and we need it
       # for the postUpgradeTasks's commands. We take advantage of the fact that
       # the renovate GitHub action mounts the /tmp folder in the container to
@@ -65,9 +55,9 @@ jobs:
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@8dd353442b603b79e9ad46ebd25bdac25d67ccfa # v38.1.13
         env:
-          LOG_LEVEL: ${{ github.event.inputs.renovate_log_level_debug == 'true' && 'DEBUG' || 'INFO' }}
+          LOG_LEVEL: 'DEBUG'
         with:
           configurationFile: .github/renovate.json5
-          token: '${{ steps.get_token.outputs.app_token }}'
+          token: '${{ secrets.PAT }}'
           mount-docker-socket: true
 
