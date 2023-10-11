@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-20.04, buildjet-2vcpu-ubuntu-2204-arm ]
+        os: [ ubuntu-20.04 ]
     steps:
     - name: Checkout code
       uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
