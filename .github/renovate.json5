@@ -67,6 +67,14 @@
   // to something non-null.
   "packageRules": [
     {
+      "matchUpdateTypes": [
+        "patch",
+        "pin",
+        "pinDigest"
+      ],
+      "automerge": true
+    },
+    {
       "groupName": "all github action dependencies",
       "groupSlug": "all-github-action",
       "matchFileNames": [
